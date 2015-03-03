@@ -1,0 +1,10 @@
+PODS:
+  - coinbase-official (2.0.1)
+
+DEPENDENCIES:
+  - coinbase-official
+
+SPEC CHECKSUMS:
+  coinbase-official: 0f96cd3211d5234ee07c8d7741f694fed6d2574b
+
+COCOAPODS: 0.35.0
