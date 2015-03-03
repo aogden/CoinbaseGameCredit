@@ -136,7 +136,7 @@ typedef NS_ENUM(NSUInteger, CoinbaseAuthenticationType) {
         }
     }
 
-    NSURL *baseURL = [NSURL URLWithString:@"https://coinbase.com/api/v1/"];
+    NSURL *baseURL = [NSURL URLWithString:@"https://api.sandbox.coinbase.com/v1/"];
     NSURL *URL = [NSURL URLWithString:path relativeToURL:baseURL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10];
     if (body) {
