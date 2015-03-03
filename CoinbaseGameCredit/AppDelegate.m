@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <coinbase-official/Coinbase.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +18,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    Coinbase* apiClient = [Coinbase coinbaseWithApiKey:@"7OdIfjXEqUyqsDcD" secret:@"6Y2DuvAo8FAUxf96ZpSOlcjcwSN8GohH"];
+    
+    [apiClient doGet:@"users/self" parameters:nil completion:^(id result, NSError *error) {
+        if (error) {
+            NSLog(@"Could not load user: %@", error);
+        } else {
+            NSLog(@"Signed in as: %@", [[result objectForKey:@"user"] objectForKey:@"email"]);
+        }
+    }];
     return YES;
 }
 
