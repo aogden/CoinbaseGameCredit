@@ -20,11 +20,46 @@
     // Override point for customization after application launch.
     Coinbase* apiClient = [Coinbase coinbaseWithApiKey:@"7OdIfjXEqUyqsDcD" secret:@"6Y2DuvAo8FAUxf96ZpSOlcjcwSN8GohH"];
     
-    [apiClient doGet:@"users/self" parameters:nil completion:^(id result, NSError *error) {
+//    [apiClient doGet:@"users/self" parameters:nil completion:^(id result, NSError *error) {
+//        if (error) {
+//            NSLog(@"Could not load user: %@", error);
+//        } else {
+//            NSLog(@"Signed in as: %@", [[result objectForKey:@"user"] objectForKey:@"email"]);
+//        }
+//    }];
+    
+//    NSMutableDictionary* postRequestParams = [NSMutableDictionary dictionary];
+//    NSMutableDictionary* buttonParms = [NSMutableDictionary dictionary];
+//    [buttonParms setObject:@"one credit" forKey:@"name"];
+//    [buttonParms setObject:@"buy_now" forKey:@"type"];
+//    [buttonParms setObject:@"false" forKey:@"subscription"];
+//    [buttonParms setObject:@"0.0005" forKey:@"price_string"];
+//    [buttonParms setObject:@"BTC" forKey:@"price_currency_iso"];
+//    [buttonParms setObject:@"none" forKey:@"style"];
+//    [postRequestParams setObject:buttonParms forKey:@"button"];
+//    [apiClient doPost:@"buttons" parameters:postRequestParams completion:^(id result, NSError *error) {
+//        if (error) {
+//            NSLog(@"Could not create button: %@", error);
+//        } else {
+//            NSLog(@"Created button: %@", result);
+//        }
+//    }];
+    
+    [apiClient doPost:@"buttons/adb82d48d6db280c1b2169bf95ecbb73/create_order" parameters:nil completion:^(id result, NSError *error) {
         if (error) {
-            NSLog(@"Could not load user: %@", error);
+            NSLog(@"Could not create order: %@", error);
         } else {
-            NSLog(@"Signed in as: %@", [[result objectForKey:@"user"] objectForKey:@"email"]);
+            NSLog(@"Response: %@", result);
+            NSDictionary* resultDict = (NSDictionary*)result;
+            if(resultDict)
+            {
+                NSDictionary* order = [resultDict objectForKey:@"order"];
+                if(order)
+                {
+                    NSString* receiveAddress = [order objectForKey:@"receive_address"];
+                    NSLog(@"Receive address is %@",receiveAddress);
+                }
+            }
         }
     }];
     return YES;
